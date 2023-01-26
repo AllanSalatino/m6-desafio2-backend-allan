@@ -22,6 +22,6 @@ class Transacao(models.Model):
     valor = models.IntegerField()
     cpf = models.CharField(max_length=11)
     cartao = models.CharField(max_length=12)
-    hora = models.CharField(max_length=6)
+    hora = models.CharField(max_length=8)
     dono_da_loja = models.CharField(max_length=14)
     nome_loja = models.CharField(max_length=19)
