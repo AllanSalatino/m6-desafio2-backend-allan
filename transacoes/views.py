@@ -22,6 +22,7 @@ class TransacaoDetailView(APIView):
 
         transacoes_cpf = []
 
+        # Filtra as transações usando o cfp passado na url
         for transacao in transacoes:
             if transacao.cpf == cpf:
                 transacoes_cpf.append(transacao)
