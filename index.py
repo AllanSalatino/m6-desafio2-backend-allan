@@ -1,4 +1,5 @@
 import requests
+import datetime
 
 
 # Seleciona parte do texto que será manipulado
@@ -27,7 +28,8 @@ def manipula_dados(caminho_arquivo):
 
     for index in range(len(conteudo_formatado)):
         dados = conteudo_formatado[inicio_corte: -1]
-        
+        regex = '{}:{}:{}'
+        hora = cortando_texto(dados, "", 42, 6).rstrip()
         # Intera sobre cada parte de texto armazenado em "dados" e salva em sua respectiva chave.
         if index < loops:
             dado_formatado = {
@@ -36,7 +38,7 @@ def manipula_dados(caminho_arquivo):
                 "valor": int(cortando_texto(dados, "", 9, 10).rstrip()) / 100.00,
                 "cpf": cortando_texto(dados, "", 19, 11).rstrip(),
                 "cartao": cortando_texto(dados, "", 30, 12).rstrip(),
-                "hora": cortando_texto(dados, "", 42, 6).rstrip(),
+                "hora": regex.format(hora[:2], hora[2:4], hora[4:6]),
                 "dono_da_loja": cortando_texto(dados, "", 48, 14).rstrip(),
                 "nome_loja": cortando_texto(dados, "", 62, 19).replace("\n", "").rstrip()
             }
