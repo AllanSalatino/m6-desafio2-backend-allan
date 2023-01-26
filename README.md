@@ -4,15 +4,17 @@
 
 1 - pip install -r requirements.txt
 
-2 - python manage.py migrate
+2 - python manage.py makemigrations
 
-3 - python manage.py runserver
+3 - python manage.py migrate
 
-4 - Abrir uma nova aba no terminal
+4 - python manage.py runserver
 
-5 - python index.py
+5 - Abrir uma nova aba no terminal
 
-6 - digite o endereço do arquivo CNAB(ex: /home/fulano/CNAB.txt)
+6 - python index.py
+
+7 - digite o endereço do arquivo CNAB(ex: /home/fulano/CNAB.txt)
 
 # Os dados seram salvos no db.sqlite3
 
