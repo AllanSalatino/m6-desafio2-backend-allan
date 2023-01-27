@@ -2,7 +2,7 @@ from .models import Transacao
 from .serializers import TransacaoSerializer
 from rest_framework import generics
 from rest_framework.views import APIView, Request, Response
-import ipdb
+
 
 class TransacaoView(generics.ListCreateAPIView):
     serializer_class = TransacaoSerializer

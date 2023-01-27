@@ -1,5 +1,4 @@
 import requests
-import datetime
 
 
 # Seleciona parte do texto que será manipulado
@@ -28,17 +27,22 @@ def manipula_dados(caminho_arquivo):
 
     for index in range(len(conteudo_formatado)):
         dados = conteudo_formatado[inicio_corte: -1]
-        regex = '{}:{}:{}'
+
+        regex_hora = '{}:{}:{}'
         hora = cortando_texto(dados, "", 42, 6).rstrip()
+
+        regex_data = '{}-{}-{}'
+        data = cortando_texto(dados, "", 1, 8).rstrip()
+
         # Intera sobre cada parte de texto armazenado em "dados" e salva em sua respectiva chave.
         if index < loops:
             dado_formatado = {
                 "tipo": tipos[int(cortando_texto(dados, "", 0, 1).rstrip())],
-                "data": cortando_texto(dados, "", 1, 8).rstrip(),
+                "data": regex_data.format(data[:4], data[4:6], data[6:8]),
                 "valor": int(cortando_texto(dados, "", 9, 10).rstrip()) / 100.00,
                 "cpf": cortando_texto(dados, "", 19, 11).rstrip(),
                 "cartao": cortando_texto(dados, "", 30, 12).rstrip(),
-                "hora": regex.format(hora[:2], hora[2:4], hora[4:6]),
+                "hora": regex_hora.format(hora[:2], hora[2:4], hora[4:6]),
                 "dono_da_loja": cortando_texto(dados, "", 48, 14).rstrip(),
                 "nome_loja": cortando_texto(dados, "", 62, 19).replace("\n", "").rstrip()
             }
@@ -54,6 +58,8 @@ print("Digite o caminho até o arquivo:")
 caminho = input()
 
 # Faz a requisição para salvar no banco de dados os dados que foram tratados
+array_status = []
 for dict_data in manipula_dados(caminho):
     requisicao = requests.post("http://127.0.0.1:8000/api/trasacoes/", data=dict_data)
+    print("status=", requisicao, "data=", dict_data, "\n")
 

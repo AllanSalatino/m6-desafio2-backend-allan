@@ -19,7 +19,7 @@ class Transacao(models.Model):
         choices=OpcoesTransacoes.choices
     )
     data = models.DateField(max_length=8)
-    valor = models.IntegerField()
+    valor = models.FloatField()
     cpf = models.CharField(max_length=11)
     cartao = models.CharField(max_length=12)
     hora = models.CharField(max_length=8)
